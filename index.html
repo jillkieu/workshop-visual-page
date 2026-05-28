@@ -496,23 +496,22 @@
         }
 
         .value-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(0, 82, 155, 0.03);
-            border: 1px solid rgba(0, 82, 155, 0.08);
-            border-radius: 50%;
+            width: 68px;
+            height: 68px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 24px auto;
-            color: var(--color-primary);
-            font-size: 22px;
             transition: var(--transition-smooth);
         }
 
+        .value-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
         .value-card:hover .value-icon {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-            color: #ffffff;
             transform: scale(1.08);
         }
 
@@ -720,8 +719,8 @@
 
         .book-container {
             position: relative;
-            width: 280px;
-            height: 380px;
+            width: 360px;
+            height: 203px; /* Tỷ lệ 16:9 hoàn hảo của ảnh bìa */
             transform-style: preserve-3d;
             transform: rotateY(-18deg) rotateX(8deg);
             transition: transform 0.6s ease;
@@ -736,47 +735,62 @@
         .book-cover {
             width: 100%;
             height: 100%;
-            border-radius: 4px 10px 10px 4px;
+            border-radius: 4px 6px 6px 4px;
             background-color: var(--bg-tertiary);
             background-image: url('ebook-cover.png');
-            background-size: cover;
+            background-size: 100% 100%;
             background-position: center;
             position: absolute;
             top: 0;
             left: 0;
             z-index: 5;
             border: 1px solid rgba(0,0,0,0.06);
-            transform: translateZ(10px); /* Move cover forward slightly */
+            transform: translateZ(8px); /* Dịch bìa lên phía trước một chút */
         }
 
-        /* 3D Book Spine Effect */
+        /* 3D Book Spine Effect (Gáy sách) */
         .book-spine {
             position: absolute;
             top: 0;
             left: 0;
-            width: 18px;
+            width: 14px;
             height: 100%;
             background: linear-gradient(90deg, #023e7d 0%, #00529b 50%, #003566 100%);
             border-radius: 4px 0 0 4px;
             z-index: 6;
             box-shadow: inset -2px 0 5px rgba(0,0,0,0.2);
-            transform: rotateY(-90deg) translateZ(9px); /* Position spine on the side */
+            transform: rotateY(-90deg) translateZ(7px); /* Đặt gáy sách ở bên trái */
             transform-origin: left center;
         }
 
-        /* 3D Book Page Edge Effect */
+        /* 3D Book Page Edge Effect (Mép giấy) */
         .book-pages {
             position: absolute;
-            top: 4px;
-            bottom: 4px;
-            left: 10px;
+            top: 3px;
+            bottom: 3px;
+            left: 8px;
             right: 0;
             background: #ffffff;
             border: 1px solid var(--border-color);
-            border-radius: 0 8px 8px 0;
+            border-radius: 0 6px 6px 0;
             z-index: 4;
-            box-shadow: inset -10px 0 20px #e2e8f0;
-            transform: translateZ(5px);
+            box-shadow: inset -8px 0 15px #e2e8f0;
+            transform: translateZ(4px);
+        }
+
+        @media (max-width: 480px) {
+            .book-container {
+                width: 280px;
+                height: 158px;
+            }
+            .book-spine {
+                width: 10px;
+                transform: rotateY(-90deg) translateZ(5px);
+            }
+            .book-pages {
+                left: 6px;
+                transform: translateZ(3px);
+            }
         }
 
         .ebook-content h3 {
@@ -1548,7 +1562,7 @@
             <div class="values-grid">
                 <div class="value-card white-card">
                     <div class="value-icon">
-                        <i class="fa-solid fa-shield-virus"></i>
+                        <img src="https://www.voltabelting.com/wp-content/uploads/Improved-Hygiene.webp" alt="Vệ sinh tối ưu">
                     </div>
                     <h3>100% Nguyên Khối</h3>
                     <p>Không chứa lớp mành vải dệt bên trong, loại bỏ hoàn toàn nguy cơ xơ sờn hay rách mép rơi vụn vải cơ học vào thực phẩm, đảm bảo tuyệt đối chuẩn QA xuất khẩu đi Mỹ và EU.</p>
@@ -1556,7 +1570,7 @@
                 
                 <div class="value-card white-card">
                     <div class="value-icon">
-                        <i class="fa-solid fa-droplet-slash"></i>
+                        <img src="https://www.voltabelting.com/wp-content/uploads/Reduced-Costs.webp" alt="Cắt giảm chi phí">
                     </div>
                     <h3>Cắt Giảm 50% Vệ Sinh</h3>
                     <p>Bề mặt phẳng bóng, không xốp giúp cọ rửa trôi bẩn cực nhanh. Tiết kiệm 50% lượng nước sạch và hóa chất tẩy rửa ca đêm, tăng sản lượng chạy máy hữu ích cho nhà máy.</p>
@@ -1564,7 +1578,7 @@
                 
                 <div class="value-card white-card">
                     <div class="value-icon">
-                        <i class="fa-solid fa-snowflake"></i>
+                        <img src="https://www.voltabelting.com/wp-content/uploads/Durability.webp" alt="Độ bền vượt trội">
                     </div>
                     <h3>Độ Bền Thách Thức</h3>
                     <p>Vật liệu dẻo dai cơ học cực cao ở nhiệt độ sub-zero phòng đông sâu không lo giòn nứt. DR Material chống chịu hóa chất Clo khử trùng đậm chất mạ băng xuất sắc.</p>
@@ -1621,6 +1635,9 @@
                     </div>
                     
                     <div class="pillar-visual">
+                        <div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                            <img src="https://www.voltabelting.com/wp-content/uploads/PositiveDrive-Image.png" alt="Cấu trúc đai SuperDrive nguyên khối của Volta" style="width: 100%; display: block; background: var(--bg-secondary); padding: 16px; height: 160px; object-fit: contain;">
+                        </div>
                         <div class="tech-specs-card">
                             <h4><i class="fa-solid fa-list-check"></i> Thông số khuyến nghị cho cá phile:</h4>
                             <ul class="spec-list">
@@ -1668,6 +1685,9 @@
                     </div>
                     
                     <div class="pillar-visual">
+                        <div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                            <img src="https://www.voltabelting.com/wp-content/uploads/SuperdriveSD-popup-1.jpg" alt="Đai truyền động tích cực SuperDrive chống trượt" style="width: 100%; display: block; object-fit: cover; height: 160px;">
+                        </div>
                         <div class="tech-specs-card">
                             <h4><i class="fa-solid fa-list-check"></i> Thông số cho buồng Glazing & Cấp đông:</h4>
                             <ul class="spec-list">
@@ -1715,6 +1735,9 @@
                     </div>
                     
                     <div class="pillar-visual">
+                        <div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                            <img src="https://www.voltabelting.com/wp-content/uploads/cs-big-shrimps-375x172.jpg" alt="Dây chuyền chế biến tôm xuất khẩu sử dụng đai chống dính" style="width: 100%; display: block; object-fit: cover; height: 160px;">
+                        </div>
                         <div class="tech-specs-card">
                             <h4><i class="fa-solid fa-list-check"></i> Thông số tối ưu cho tôm mực:</h4>
                             <ul class="spec-list">
@@ -1762,6 +1785,9 @@
                     </div>
                     
                     <div class="pillar-visual">
+                        <div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                            <img src="https://www.voltabelting.com/wp-content/uploads/Narrow-Transfers-popup.jpg" alt="Dây chuyền truyền động con lăn nhỏ hẹp và chuyển tải Volta" style="width: 100%; display: block; object-fit: cover; height: 160px;">
+                        </div>
                         <div class="tech-specs-card">
                             <h4><i class="fa-solid fa-list-check"></i> Quyền lợi hỗ trợ cho OEMs:</h4>
                             <ul class="spec-list">
@@ -1856,6 +1882,9 @@
                 <div class="quote">
                     "Sau khi chuyển đổi sang băng tải Volta SuperDrive nguyên khối, nhà máy chúng tôi đã hoàn toàn loại bỏ Listeria đạt 100% chuẩn kiểm định xuất khẩu, cọ rửa cực kỳ nhanh sạch và tiết kiệm 61% chi phí vận hành hàng năm."
                     <br><strong style="color: var(--color-dark); font-size: 13px; font-style: normal; margin-top: 8px; display: block;">— Mr. Hùng, Giám đốc Nhà máy Hinh Puh Việt Nam</strong>
+                </div>
+                <div style="margin-top: 24px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                    <img src="https://www.voltabelting.com/wp-content/uploads/cs-big-shrimps-768x353.jpg" alt="Thực tế sản xuất tôm xuất khẩu sử dụng băng tải Volta" style="width: 100%; display: block; object-fit: cover; height: 180px;">
                 </div>
             </div>
             
